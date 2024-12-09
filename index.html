@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Writing Names and Dates</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+    <style>
+        /* Ensure the page is scrollable */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            overflow-y: auto;
+        }
+
+        body {
+            background: #FFFFE0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: auto;
+        }
+
+        header {
+            top: 0;
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            color: #0d0909;
+            font-size: 24px;
+            z-index: 10;
+        }
+
+        .canvas-frame {
+            background-color: #7B3F00;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            margin: 20px;
+        }
+
+        canvas {
+            background-color: #2E8B57;
+            border-radius: 5px;
+        }
+
+        .input-container,
+        .dropdown-container {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        label {
+            color: rgb(10, 5, 5);
+            font-size: 16px;
+        }
+
+        select,
+        input {
+            padding: 8px 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        button,
+        .back-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .reset-btn,
+        .trace-btn,
+        .trace-again-btn,
+        .try-btn {
+            background-color: #228b22;
+            color: white;
+        }
+
+        .back-btn {
+            background-color: #ff4c4c;
+            color: white;
+        }
+
+        button:hover,
+        .back-btn:hover {
+            opacity: 0.8;
+        }
+
+        .congratulations {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+
+        footer {
+            width: 100%;
+            color: rgb(8, 5, 5);
+            text-align: center;
+            padding: 10px 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="logo" src="Logo2.png" alt="Logo">
+    <header>
+        Writing Names and Dates
+    </header>
+
+    <div class="input-container">
+        <label for="name-input">Enter your name or Date (e.g., 01/01/2024):</label>
+        <input type="text" id="name-input" placeholder="Type here..." />
+        <button class="trace-btn" onclick="traceName()">Trace</button>
+    </div>
+
+    <div class="dropdown-container">
+        <label for="pen-color">Choose Pen Color:</label>
+        <select id="pen-color" onchange="changePenColor(this.value)">
+            <option value="white" selected>White</option>
+            <option value="black">Black</option>
+            <option value="red">Red</option>
+            <option value="yellow">Yellow</option>
+            <option value="brown">Brown</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="orange">Orange</option>
+        </select>
+    </div>
+
+    <main id="canvas-container" class="canvas-frame"></main>
+
+    <div class="button-container">
+        <button class="trace-again-btn" onclick="traceName()">Trace Again</button>
+        <button class="reset-btn" onclick="resetCanvas()">Reset</button>
+        <button class="try-btn" onclick="enableDrawing()">Try It Yourself</button>
+        <a href="index.html" class="back-btn">Back</a>
+    </div>
+
+    <p class="congratulations" id="congrats-message">Congratulations!!! 🎉👏</p>
+    <audio id="applause-sound" src="applause.mp3" preload="auto"></audio>
+
+    <footer>
+        Designed For Namibian Correctional Service
+    </footer>
+
+    <script src="sketch.js"></script>
+</body>
+
+</html>
